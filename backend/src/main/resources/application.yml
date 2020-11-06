@@ -1,0 +1,8 @@
+spring:
+  profiles: prod
+  datasource:
+    username: pollarbear
+    url: jdbc:postgresql://localhost/pollarbear
+  jpa:
+    hibernate:
+      ddl-auto: update
