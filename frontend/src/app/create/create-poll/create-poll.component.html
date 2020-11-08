@@ -1,1 +1,51 @@
-<p>create-poll works!</p>
+<input class="title" type="text" placeholder="New Poll" autofocus />
+
+<div class="config">
+  <fieldset>
+    <legend>Select</legend>
+    <div class="radio-group">
+      <input
+        type="radio"
+        id="selectSingle"
+        name="select"
+        value="Single"
+        checked
+      />
+      <label for="selectSingle">Single</label>
+      <input type="radio" id="selectMultiple" name="select" value="Multiple" />
+      <label for="selectMultiple">Multiple</label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Vote</legend>
+    <div class="radio-group">
+      <input type="radio" id="voteOpen" name="vote" value="Open" checked />
+      <label for="voteOpen">Open</label>
+      <input type="radio" id="voteSecret" name="vote" value="Secret" />
+      <label for="voteSecret">Secret</label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Options</legend>
+    <div class="radio-group">
+      <input
+        type="radio"
+        id="optionsYesNo"
+        name="options"
+        value="YesNo"
+        checked
+      />
+      <label for="optionsYesNo">Yes / No</label>
+      <input
+        type="radio"
+        id="optionsYesNoMaybe"
+        name="options"
+        value="YesNoMaybe"
+      />
+      <label for="optionsYesNoMaybe">Yes / No / Maybe</label>
+    </div>
+  </fieldset>
+</div>
+<div class="next">
+  <button>Next &gt;</button>
+</div>

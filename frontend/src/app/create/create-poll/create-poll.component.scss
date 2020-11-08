@@ -1,0 +1,21 @@
+.title {
+  font-size: 2rem;
+  width: 100%;
+}
+
+.config {
+  margin: var(--s2) 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
+  row-gap: 4vh;
+  column-gap: var(--s1);
+}
+
+.config {
+  max-width: 100%;
+}
+
+.next {
+  display: flex;
+  justify-content: flex-end;
+}

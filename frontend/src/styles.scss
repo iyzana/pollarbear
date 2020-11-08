@@ -1,13 +1,18 @@
 :root {
   --bg: #444444;
   --fg: #c4dbe0;
-  --accent: #2eb5e0;
+  --accent: #d7fffe;
+  --s0: 0.5rem;
+  --s1: 2rem;
+  --s2: 6vh;
+  --border: 2px;
+  --radius: 4px;
 }
 
 html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 
   color: var(--fg);
   background-color: var(--bg);
@@ -16,7 +21,78 @@ html {
 }
 
 body {
-  width: 95%;
+  width: 85%;
   max-width: 1000px;
   margin: 0 auto;
+  padding: var(--s1) 0;
+}
+
+input {
+  color: var(--fg);
+  background-color: var(--bg);
+  border: none;
+  border-bottom: var(--border) solid var(--accent);
+}
+
+button {
+  font-size: 1rem;
+  font-weight: 500;
+  border: var(--border) solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--fg);
+  background-color: var(--bg);
+  padding: var(--s0);
+  cursor: pointer;
+  transition: color background-color;
+  transition-duration: 0.1s;
+}
+
+button:hover {
+  color: var(--bg);
+  background-color: var(--accent);
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: var(--s0);
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  border: var(--border) solid var(--accent);
+  border-radius: var(--radius);
+
+  input[type='radio'] {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    border-bottom: var(--border) solid var(--accent);
+    padding: var(--s0);
+    margin: -1px;
+    cursor: pointer;
+  }
+  label:first-of-type {
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  label:last-of-type {
+    border-radius: 0 0 var(--radius) var(--radius);
+    border-bottom: none;
+  }
+  input[type='radio']:checked + label {
+    color: var(--bg);
+    background-color: var(--accent);
+  }
 }
