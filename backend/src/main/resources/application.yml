@@ -1,6 +1,10 @@
 server:
   error:
     include-message: always
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
 ---
 spring:
   profiles: prod
