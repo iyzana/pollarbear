@@ -9,7 +9,7 @@ data class Answer(
     @OneToMany
     @Cascade(CascadeType.ALL)
     var selection: List<Selection>,
-    @Column(name = "answerer")
+    @Column(name = "respondent")
     var from: String? = null,
 
     @Id
