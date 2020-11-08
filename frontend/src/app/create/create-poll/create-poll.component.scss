@@ -17,5 +17,11 @@
 
 .next {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.advanced {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
