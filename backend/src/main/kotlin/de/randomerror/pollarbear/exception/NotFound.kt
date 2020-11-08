@@ -1,9 +1,12 @@
 package de.randomerror.pollarbear.exception
 
-import jdk.jshell.spi.ExecutionControl
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.ResponseStatus
-import java.lang.RuntimeException
+import org.springframework.web.server.ResponseStatusException
+import kotlin.reflect.jvm.jvmName
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class NotFound(entity: String, id: Long) : RuntimeException("$entity(id = $id) not found")
+inline fun <reified T> notFound(id: Long) = NotFound(T::class.simpleName ?: T::class.jvmName, id.toString())
+
+inline fun <reified T> notFound(ref: String) = NotFound(T::class.simpleName ?: T::class.jvmName, ref, "ref")
+
+class NotFound(resource: String, value: String, field: String = "id") :
+    ResponseStatusException(HttpStatus.NOT_FOUND, "Found no $resource with $field $value")

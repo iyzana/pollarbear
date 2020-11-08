@@ -1,6 +1,5 @@
 package de.randomerror.pollarbear.db.entity
 
-import de.randomerror.pollarbear.db.entity.Option
 import de.randomerror.pollarbear.db.enum.SelectionValue
 import javax.persistence.*
 
