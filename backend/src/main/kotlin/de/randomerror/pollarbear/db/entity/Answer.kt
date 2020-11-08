@@ -6,11 +6,11 @@ import javax.persistence.*
 
 @Entity
 data class Answer(
-    @Column(name = "answerer")
-    var from: String?,
     @OneToMany
     @Cascade(CascadeType.ALL)
     var selection: List<Selection>,
+    @Column(name = "answerer")
+    var from: String? = null,
 
     @Id
     @GeneratedValue

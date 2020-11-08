@@ -6,8 +6,10 @@ import de.randomerror.pollarbear.db.enum.SecrecyKind
 import de.randomerror.pollarbear.db.enum.SelectKind
 import org.hibernate.annotations.Cascade
 import org.hibernate.annotations.CascadeType
+import java.math.BigInteger
 import java.time.LocalDateTime
 import javax.persistence.*
+import kotlin.random.Random
 
 @Entity
 data class Poll(
@@ -23,15 +25,25 @@ data class Poll(
     var summaryKind: SummaryKind,
     @Enumerated(EnumType.STRING)
     var answerKind: AnswerKind,
-    var deadline: LocalDateTime,
+    var deadline: LocalDateTime?,
 
     @OneToMany
     @Cascade(CascadeType.ALL)
     var options: MutableList<Option> = mutableListOf(),
     @OneToMany
+    @Cascade(CascadeType.ALL)
     var answers: MutableList<Answer> = mutableListOf(),
+
+    @Column(length = 10)
+    val ref: String = generateRef(),
 
     @Id
     @GeneratedValue
-    var id: Long = 0
+    val id: Long = 0
 )
+
+fun generateRef(): String {
+    val bytes = ByteArray(6)
+    Random.Default.nextBytes(bytes)
+    return BigInteger(1, bytes).toString(36)
+}

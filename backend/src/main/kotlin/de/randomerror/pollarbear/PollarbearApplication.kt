@@ -1,9 +1,7 @@
 package de.randomerror.pollarbear
 
 import de.randomerror.pollarbear.db.PollRepo
-import de.randomerror.pollarbear.db.entity.Option
-import de.randomerror.pollarbear.db.entity.Poll
-import de.randomerror.pollarbear.db.entity.SummaryKind
+import de.randomerror.pollarbear.db.entity.*
 import de.randomerror.pollarbear.db.enum.*
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -16,7 +14,7 @@ import javax.annotation.PostConstruct
 class PollarbearApplication
 
 fun main(args: Array<String>) {
-	runApplication<PollarbearApplication>(*args)
+    runApplication<PollarbearApplication>(*args)
 }
 
 @Component
@@ -32,8 +30,9 @@ class Init(val polls: PollRepo) {
             AnswerKind.Simple,
             LocalDateTime.now()
         )
-        poll.options.add(Option("Roar!", null))
-        poll.options.add(Option("Rawr!", null))
+        poll.options.add(Option("Roar!", false))
+        poll.options.add(Option("Rawr!", false))
+        poll.answers.add(Answer(listOf(Selection(poll.options[0], SelectionValue.Yes)), "me"))
         polls.save(poll)
     }
 }
