@@ -23,8 +23,15 @@ export class CreatePollComponent implements OnInit {
       optionKind: new FormControl('YesNo'),
       summaryKind: new FormGroup({
         cutoffKind: new FormControl('Top'),
-        cutoffValueTop: new FormControl(3),
-        cutoffValueTopPercent: new FormControl(90),
+        cutoffValueTop: new FormControl(3, [
+          Validators.required,
+          Validators.min(0),
+        ]),
+        cutoffValueTopPercent: new FormControl(90, [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(100),
+        ]),
       }),
       deadline: new FormControl(),
     });

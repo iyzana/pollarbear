@@ -15,6 +15,7 @@
           type="radio"
           id="selectSingle"
           value="Single"
+          name="selectKind"
           formControlName="selectKind"
         />
         <label for="selectSingle">Single</label>
@@ -22,6 +23,7 @@
           type="radio"
           id="selectMultiple"
           value="Multiple"
+          name="selectKind"
           formControlName="selectKind"
         />
         <label for="selectMultiple">Multiple</label>
@@ -34,6 +36,7 @@
           type="radio"
           id="voteOpen"
           value="Open"
+          name="secrecyKind"
           formControlName="secrecyKind"
         />
         <label for="voteOpen">Open</label>
@@ -41,6 +44,7 @@
           type="radio"
           id="voteSecret"
           value="Secret"
+          name="secrecyKind"
           formControlName="secrecyKind"
         />
         <label for="voteSecret">Secret</label>
@@ -53,6 +57,7 @@
           type="radio"
           id="optionsYesNo"
           value="YesNo"
+          name="optionKind"
           formControlName="optionKind"
         />
         <label for="optionsYesNo">Yes / No</label>
@@ -60,6 +65,7 @@
           type="radio"
           id="optionsYesNoMaybe"
           value="YesNoMaybe"
+          name="optionKind"
           formControlName="optionKind"
         />
         <label for="optionsYesNoMaybe">Yes / No / Maybe</label>
@@ -72,12 +78,14 @@
           type="radio"
           id="resultsTop"
           value="Top"
+          name="cutoffKind"
           formControlName="cutoffKind"
         />
         <label for="resultsTop">
           Show top&nbsp;
           <input
             type="number"
+            min="0"
             (click)="
               this.form.patchValue({ summaryKind: { cutoffKind: 'Top' } })
             "
@@ -95,12 +103,15 @@
           type="radio"
           id="resultsTopPercent"
           value="TopPercent"
+          name="cutoffKind"
           formControlName="cutoffKind"
         />
         <label for="resultsTopPercent">
           Show top&nbsp;
           <input
             type="number"
+            min="0"
+            max="100"
             (click)="
               this.form.patchValue({
                 summaryKind: { cutoffKind: 'TopPercent' }
