@@ -20,8 +20,36 @@
   justify-content: space-between;
 }
 
-.advanced {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+.next > *:last-child {
+  margin-left: auto;
+}
+
+label {
+  input[type='number'] {
+    width: 3rem;
+    height: 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.1rem var(--s0) 0 var(--s0);
+    -moz-appearance: textfield; /* Firefox */
+  }
+
+  input[type='number']::selection {
+    background-color: var(--accent-darker);
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+}
+
+input[type='radio']:checked + label {
+  input[type='number'] {
+    color: var(--bg);
+    background-color: var(--accent-dark);
+    border-color: var(--bg);
+  }
 }

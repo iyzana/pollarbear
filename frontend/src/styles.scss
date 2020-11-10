@@ -1,7 +1,11 @@
 :root {
   --bg: #444444;
+  --bg-light: #555555;
   --fg: #c4dbe0;
   --accent: #d7fffe;
+  --accent-dark: #bbe8e7;
+  --accent-darker: #6ecfcc;
+  --invalid: #d73030;
   --s0: 0.5rem;
   --s1: 2rem;
   --s2: 6vh;
@@ -45,11 +49,16 @@ body {
 
 input {
   color: var(--fg);
-  background-color: #555555;
+  background-color: var(--bg-light);
   padding: var(--s0);
   border: none;
   border-bottom: var(--border) solid var(--accent);
   border-radius: var(--radius) var(--radius) 0 0;
+}
+
+input.ng-invalid.ng-touched,
+input.ng-invalid.ng-dirty {
+  border-color: var(--invalid);
 }
 
 button {
@@ -78,24 +87,38 @@ button:focus {
   text-decoration: underline 2px;
 }
 
+button:disabled {
+  border-color: var(--bg-light);
+}
+
 fieldset {
   border: none;
   padding: 0;
   margin: 0;
 }
 
-legend {
+fieldset > legend,
+fieldset > label {
+  display: inline-block;
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: var(--s0);
 }
 
-fieldset:active > legend {
-  text-decoration: underline 2px;
+fieldset:active > legend,
+fieldset:active > label {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
 }
 
-fieldset:focus-within > legend {
-  text-decoration: underline 2px;
+fieldset:focus-within > legend,
+fieldset:focus-within > label {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+}
+
+fieldset > input {
+  width: 100%;
 }
 
 .radio-group {

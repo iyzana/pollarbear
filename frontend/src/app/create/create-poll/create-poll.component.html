@@ -1,53 +1,126 @@
-<input class="title" type="text" placeholder="Poll Title" autofocus />
+<form [formGroup]="group">
+  <input
+    class="title"
+    type="text"
+    placeholder="Poll Title"
+    formControlName="title"
+    autofocus
+  />
 
-<div class="config">
-  <fieldset>
-    <legend>Select</legend>
-    <div class="radio-group">
-      <input
-        type="radio"
-        id="selectSingle"
-        name="select"
-        value="Single"
-        checked
-      />
-      <label for="selectSingle">Single</label>
-      <input type="radio" id="selectMultiple" name="select" value="Multiple" />
-      <label for="selectMultiple">Multiple</label>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Vote</legend>
-    <div class="radio-group">
-      <input type="radio" id="voteOpen" name="vote" value="Open" checked />
-      <label for="voteOpen">Open</label>
-      <input type="radio" id="voteSecret" name="vote" value="Secret" />
-      <label for="voteSecret">Secret</label>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Options</legend>
-    <div class="radio-group">
-      <input
-        type="radio"
-        id="optionsYesNo"
-        name="options"
-        value="YesNo"
-        checked
-      />
-      <label for="optionsYesNo">Yes / No</label>
-      <input
-        type="radio"
-        id="optionsYesNoMaybe"
-        name="options"
-        value="YesNoMaybe"
-      />
-      <label for="optionsYesNoMaybe">Yes / No / Maybe</label>
-    </div>
-  </fieldset>
-</div>
+  <div class="config">
+    <fieldset>
+      <legend>Select</legend>
+      <div class="radio-group">
+        <input
+          type="radio"
+          id="selectSingle"
+          name="select"
+          value="Single"
+          checked
+        />
+        <label for="selectSingle">Single</label>
+        <input
+          type="radio"
+          id="selectMultiple"
+          name="select"
+          value="Multiple"
+        />
+        <label for="selectMultiple">Multiple</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Vote</legend>
+      <div class="radio-group">
+        <input type="radio" id="voteOpen" name="vote" value="Open" checked />
+        <label for="voteOpen">Open</label>
+        <input type="radio" id="voteSecret" name="vote" value="Secret" />
+        <label for="voteSecret">Secret</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Options</legend>
+      <div class="radio-group">
+        <input
+          type="radio"
+          id="optionsYesNo"
+          name="options"
+          value="YesNo"
+          checked
+        />
+        <label for="optionsYesNo">Yes / No</label>
+        <input
+          type="radio"
+          id="optionsYesNoMaybe"
+          name="options"
+          value="YesNoMaybe"
+        />
+        <label for="optionsYesNoMaybe">Yes / No / Maybe</label>
+      </div>
+    </fieldset>
+    <fieldset *ngIf="advanced">
+      <legend>Results</legend>
+      <div class="radio-group">
+        <input
+          type="radio"
+          id="resultsTop"
+          name="results"
+          value="Top"
+          formControlName="results"
+          checked
+        />
+        <label for="resultsTop">
+          Show top&nbsp;
+          <input
+            type="number"
+            (click)="this.group.patchValue({ results: 'Top' })"
+            (focus)="$event.target.select()"
+            [tabindex]="
+              this.group.get('results').value === 'TopPercent' ? -1 : 0
+            "
+            value="3"
+          />
+        </label>
+        <input
+          type="radio"
+          id="resultsTopPercent"
+          name="results"
+          value="TopPercent"
+          formControlName="results"
+        />
+        <label for="resultsTopPercent">
+          Show top&nbsp;
+          <input
+            type="number"
+            (click)="this.group.patchValue({ results: 'TopPercent' })"
+            (focus)="$event.target.select()"
+            [tabindex]="this.group.get('results').value === 'Top' ? -1 : 0"
+            value="90"
+          />
+          &nbsp;%
+        </label>
+      </div>
+    </fieldset>
+    <fieldset *ngIf="advanced">
+      <label for="deadline">Deadline</label>
+      <input type="date" id="deadline" [min]="now" />
+    </fieldset>
+  </div>
 
-<div class="next">
-  <button class="link">Results / Deadline ↓</button>
-  <button type="submit">Next →</button>
-</div>
+  <div class="next">
+    <button
+      type="button"
+      class="link"
+      (click)="advanced = !advanced"
+      *ngIf="!advanced"
+    >
+      Results / Deadline ↓
+    </button>
+    <button
+      type="submit"
+      routerLink="/create/options"
+      [disabled]="!group.valid"
+    >
+      Next →
+    </button>
+  </div>
+</form>
