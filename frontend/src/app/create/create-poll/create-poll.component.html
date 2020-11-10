@@ -1,4 +1,4 @@
-<form [formGroup]="group">
+<form [formGroup]="form">
   <input
     class="title"
     type="text"
@@ -14,16 +14,15 @@
         <input
           type="radio"
           id="selectSingle"
-          name="select"
           value="Single"
-          checked
+          formControlName="selectKind"
         />
         <label for="selectSingle">Single</label>
         <input
           type="radio"
           id="selectMultiple"
-          name="select"
           value="Multiple"
+          formControlName="selectKind"
         />
         <label for="selectMultiple">Multiple</label>
       </div>
@@ -31,9 +30,19 @@
     <fieldset>
       <legend>Vote</legend>
       <div class="radio-group">
-        <input type="radio" id="voteOpen" name="vote" value="Open" checked />
+        <input
+          type="radio"
+          id="voteOpen"
+          value="Open"
+          formControlName="secrecyKind"
+        />
         <label for="voteOpen">Open</label>
-        <input type="radio" id="voteSecret" name="vote" value="Secret" />
+        <input
+          type="radio"
+          id="voteSecret"
+          value="Secret"
+          formControlName="secrecyKind"
+        />
         <label for="voteSecret">Secret</label>
       </div>
     </fieldset>
@@ -43,58 +52,67 @@
         <input
           type="radio"
           id="optionsYesNo"
-          name="options"
           value="YesNo"
-          checked
+          formControlName="optionKind"
         />
         <label for="optionsYesNo">Yes / No</label>
         <input
           type="radio"
           id="optionsYesNoMaybe"
-          name="options"
           value="YesNoMaybe"
+          formControlName="optionKind"
         />
         <label for="optionsYesNoMaybe">Yes / No / Maybe</label>
       </div>
     </fieldset>
-    <fieldset *ngIf="advanced">
+    <fieldset *ngIf="advanced" formGroupName="summaryKind">
       <legend>Results</legend>
       <div class="radio-group">
         <input
           type="radio"
           id="resultsTop"
-          name="results"
           value="Top"
-          formControlName="results"
-          checked
+          formControlName="cutoffKind"
         />
         <label for="resultsTop">
           Show top&nbsp;
           <input
             type="number"
-            (click)="this.group.patchValue({ results: 'Top' })"
+            (click)="
+              this.form.patchValue({ summaryKind: { cutoffKind: 'Top' } })
+            "
             (focus)="$event.target.select()"
             [tabindex]="
-              this.group.get('results').value === 'TopPercent' ? -1 : 0
+              this.form.get('summaryKind').get('cutoffKind').value ===
+              'TopPercent'
+                ? -1
+                : 0
             "
-            value="3"
+            formControlName="cutoffValueTop"
           />
         </label>
         <input
           type="radio"
           id="resultsTopPercent"
-          name="results"
           value="TopPercent"
-          formControlName="results"
+          formControlName="cutoffKind"
         />
         <label for="resultsTopPercent">
           Show top&nbsp;
           <input
             type="number"
-            (click)="this.group.patchValue({ results: 'TopPercent' })"
+            (click)="
+              this.form.patchValue({
+                summaryKind: { cutoffKind: 'TopPercent' }
+              })
+            "
             (focus)="$event.target.select()"
-            [tabindex]="this.group.get('results').value === 'Top' ? -1 : 0"
-            value="90"
+            [tabindex]="
+              this.form.get('summaryKind').get('cutoffKind').value === 'Top'
+                ? -1
+                : 0
+            "
+            formControlName="cutoffValueTopPercent"
           />
           &nbsp;%
         </label>
@@ -102,7 +120,7 @@
     </fieldset>
     <fieldset *ngIf="advanced">
       <label for="deadline">Deadline</label>
-      <input type="date" id="deadline" [min]="now" />
+      <input type="date" id="deadline" [min]="now" formControlName="deadline" />
     </fieldset>
   </div>
 
@@ -118,7 +136,8 @@
     <button
       type="submit"
       routerLink="/create/options"
-      [disabled]="!group.valid"
+      (click)="next()"
+      [disabled]="!form.valid"
     >
       Next →
     </button>

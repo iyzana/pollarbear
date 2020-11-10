@@ -52,4 +52,7 @@ input[type='radio']:checked + label {
     background-color: var(--accent-dark);
     border-color: var(--bg);
   }
+  input[type='number'].ng-invalid {
+    border-color: var(--invalid);
+  }
 }
