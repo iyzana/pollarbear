@@ -1,5 +1,9 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CutoffKind } from '../../model/enum/cutoff-kind';
+import { OptionKind } from '../../model/enum/option-kind';
+import { SecrecyKind } from '../../model/enum/secrecy-kind';
+import { SelectKind } from '../../model/enum/select-kind';
 import { PollCreate } from '../../model/poll-create';
 
 @Component({
@@ -18,11 +22,11 @@ export class CreatePollComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
-      selectKind: new FormControl('Single'),
-      secrecyKind: new FormControl('Open'),
-      optionKind: new FormControl('YesNo'),
+      selectKind: new FormControl(SelectKind.Single),
+      secrecyKind: new FormControl(SecrecyKind.Open),
+      optionKind: new FormControl(OptionKind.YesNo),
       summaryKind: new FormGroup({
-        cutoffKind: new FormControl('Top'),
+        cutoffKind: new FormControl(CutoffKind.Top),
         cutoffValueTop: new FormControl(3, [
           Validators.required,
           Validators.min(0),
@@ -49,6 +53,6 @@ export class CreatePollComponent implements OnInit {
             : input.summaryKind.cutoffValueTopPercent,
       },
     };
-    localStorage.setItem('createPoll', JSON.stringify(pollCreate));
+    localStorage.setItem('pollCreate', JSON.stringify(pollCreate));
   }
 }

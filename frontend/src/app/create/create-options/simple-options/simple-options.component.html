@@ -1,1 +1,11 @@
-<p>simple-options works!</p>
+<form [formGroup]="form">
+  <ol formArrayName="options">
+    <li *ngFor="let option of options.controls; let i = index">
+      <input
+        type="text"
+        [formControlName]="i"
+        [placeholder]="'Option ' + (i + 1)"
+      />
+    </li>
+  </ol>
+</form>

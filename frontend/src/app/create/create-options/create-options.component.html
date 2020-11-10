@@ -1,3 +1,15 @@
-<p>create-options works!</p>
+<h1>{{ title }}</h1>
+
+<div class="tab-group">
+  <a
+    routerLink="simple"
+    [ngClass]="{ selected: router.url.includes('/simple') }"
+  >
+    Simple
+  </a>
+  <a routerLink="date" [ngClass]="{ selected: router.url.includes('/date') }">
+    Date
+  </a>
+</div>
 
 <router-outlet></router-outlet>

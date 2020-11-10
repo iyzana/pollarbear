@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-options',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-options.component.scss'],
 })
 export class CreateOptionsComponent implements OnInit {
-  constructor() {}
+  title: string;
 
-  ngOnInit(): void {}
+  constructor(public router: Router) {}
+
+  ngOnInit(): void {
+    this.title = JSON.parse(localStorage.getItem('pollCreate')).title;
+  }
 }

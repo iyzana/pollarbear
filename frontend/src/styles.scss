@@ -45,6 +45,11 @@ body {
   }
 }
 
+h1 {
+  font-size: 2rem;
+  font-weight: unset;
+}
+
 /* components */
 
 input {
@@ -89,6 +94,49 @@ button:focus {
 
 button:disabled {
   border-color: var(--bg-light);
+}
+
+.tab-group {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  border: var(--border) solid var(--accent);
+  border-radius: var(--radius);
+
+  a {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    color: var(--fg);
+    text-decoration-line: none;
+    font-weight: 500;
+    border-right: var(--border) solid var(--accent);
+    padding: var(--s0);
+    margin: -1px;
+    cursor: pointer;
+  }
+  a:first-of-type {
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
+  a:last-of-type {
+    border-radius: 0 var(--radius) var(--radius) 0;
+    border-right: none;
+  }
+  a.selected {
+    color: var(--bg);
+    background-color: var(--accent);
+  }
+}
+
+ol {
+  padding: 0;
+  margin: calc(var(--s1) * -1 + var(--s2)) 0;
+}
+
+ol > li {
+  width: 100%;
+  margin: var(--s1) 0;
+  list-style-type: none;
 }
 
 fieldset {
