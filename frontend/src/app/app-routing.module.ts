@@ -3,9 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'choice',
-    loadChildren: () =>
-      import('./choice/choice.module').then((m) => m.ChoiceModule),
+    path: 'vote',
+    loadChildren: () => import('./vote/vote.module').then((m) => m.VoteModule),
   },
   {
     path: 'results',

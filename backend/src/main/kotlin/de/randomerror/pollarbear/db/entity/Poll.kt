@@ -7,7 +7,7 @@ import de.randomerror.pollarbear.db.enum.SelectKind
 import org.hibernate.annotations.Cascade
 import org.hibernate.annotations.CascadeType
 import java.math.BigInteger
-import java.time.LocalDateTime
+import java.time.LocalDate
 import javax.persistence.*
 import kotlin.random.Random
 
@@ -25,7 +25,7 @@ data class Poll(
     var summaryKind: SummaryKind,
     @Enumerated(EnumType.STRING)
     var answerKind: AnswerKind,
-    var deadline: LocalDateTime?,
+    var deadline: LocalDate?,
 
     @OneToMany
     @Cascade(CascadeType.ALL)

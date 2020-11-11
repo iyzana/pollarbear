@@ -7,6 +7,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AnswerKind } from '../../../model/enum/answer-kind';
 import { OptionCreate } from '../../../model/option-create';
 import { PollCreate } from '../../../model/poll-create';
@@ -23,16 +24,16 @@ export class SimpleOptionsComponent
   optionInputs: QueryList<HTMLElement>;
   form: FormGroup;
 
-  constructor(private createService: CreateService) {}
+  constructor(private createService: CreateService, private router: Router) {}
 
   ngOnInit(): void {
-    const restoreOptions: OptionCreate[] = JSON.parse(
-      localStorage.getItem('pollCreate_optionsSimple') || '[]',
+    const restore: OptionCreate[] = JSON.parse(
+      sessionStorage.getItem('pollCreate_optionsSimple') || '[]',
     );
 
     this.form = new FormGroup({
       options: new FormArray(
-        restoreOptions.map(
+        restore.map(
           (option) => new FormGroup({ text: new FormControl(option.text) }),
         ),
       ),
@@ -42,6 +43,10 @@ export class SimpleOptionsComponent
       this.addEmptyOption();
     });
     this.addEmptyOption();
+
+    const poll: PollCreate = JSON.parse(sessionStorage.getItem('pollCreate'));
+    poll.answerKind = AnswerKind.Simple;
+    sessionStorage.setItem('pollCreate', JSON.stringify(poll));
   }
 
   ngAfterViewInit(): void {
@@ -50,7 +55,7 @@ export class SimpleOptionsComponent
   }
 
   ngOnDestroy(): void {
-    localStorage.setItem(
+    sessionStorage.setItem(
       'pollCreate_optionsSimple',
       JSON.stringify(this.options.value),
     );
@@ -100,15 +105,15 @@ export class SimpleOptionsComponent
 
   createPoll() {
     const pollCreate: PollCreate = {
-      ...JSON.parse(localStorage.getItem('pollCreate')),
-      answerKind: AnswerKind.Simple,
+      ...JSON.parse(sessionStorage.getItem('pollCreate')),
       options: this.form
         .get('options')
-        .value.filter((option) => option.text.trim() !== ''),
+        .value.filter((option: OptionCreate) => option.text.trim() !== ''),
     };
     this.createService.createPoll(pollCreate).subscribe((response) => {
-      localStorage.clear();
+      sessionStorage.clear();
       console.log('creating poll successful', response);
+      this.router.navigate(['vote', response.ref]);
     });
   }
 }

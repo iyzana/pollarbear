@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-choice',
-  templateUrl: './choice.component.html',
-  styleUrls: ['./choice.component.scss'],
+  templateUrl: './vote.component.html',
+  styleUrls: ['./vote.component.scss'],
 })
-export class ChoiceComponent implements OnInit {
+export class VoteComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

@@ -144,12 +144,7 @@
     >
       Results / Deadline ↓
     </button>
-    <button
-      type="submit"
-      routerLink="/create/options"
-      (click)="next()"
-      [disabled]="!form.valid"
-    >
+    <button type="submit" routerLink="/create/options" [disabled]="!form.valid">
       Next →
     </button>
   </div>

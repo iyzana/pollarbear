@@ -2,7 +2,7 @@ package de.randomerror.pollarbear.api
 
 import de.randomerror.pollarbear.db.entity.SummaryKind
 import de.randomerror.pollarbear.db.enum.*
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 data class PollCreate(
     val title: String,
@@ -11,7 +11,7 @@ data class PollCreate(
     val optionKind: OptionKind,
     val summaryKind: SummaryKind,
     val answerKind: AnswerKind,
-    val deadline: LocalDateTime?,
+    val deadline: LocalDate?,
     val options: List<OptionCreate>
 )
 

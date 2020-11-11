@@ -8,15 +8,11 @@ import { PollCreate } from '../../../model/poll-create';
   styleUrls: ['./date-options.component.scss'],
 })
 export class DateOptionsComponent implements OnInit {
-  poll: PollCreate;
-
   constructor() {}
 
   ngOnInit(): void {
-    this.poll = {
-      ...JSON.parse(localStorage.getItem('pollCreate')),
-      answerKind: AnswerKind.Simple,
-      options: [],
-    };
+    const poll: PollCreate = JSON.parse(sessionStorage.getItem('pollCreate'));
+    poll.answerKind = AnswerKind.Date;
+    sessionStorage.setItem('pollCreate', JSON.stringify(poll));
   }
 }

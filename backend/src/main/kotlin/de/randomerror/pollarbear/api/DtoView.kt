@@ -5,7 +5,7 @@ import de.randomerror.pollarbear.db.entity.Option
 import de.randomerror.pollarbear.db.entity.Poll
 import de.randomerror.pollarbear.db.entity.SummaryKind
 import de.randomerror.pollarbear.db.enum.*
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 data class PollView(
     val title: String,
@@ -14,7 +14,7 @@ data class PollView(
     val optionKind: OptionKind,
     val summaryKind: SummaryKind,
     val answerKind: AnswerKind,
-    val deadline: LocalDateTime?,
+    val deadline: LocalDate?,
     val options: List<OptionView>,
     val answers: List<AnswerView>,
     val ref: String

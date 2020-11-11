@@ -11,9 +11,8 @@ const routes: Routes = [
     path: 'options',
     component: CreateOptionsComponent,
     children: [
-      { path: 'simple', component: SimpleOptionsComponent },
       { path: 'date', component: DateOptionsComponent },
-      { path: '', redirectTo: 'simple', pathMatch: 'full' },
+      { path: '', component: SimpleOptionsComponent },
     ],
   },
   { path: '', redirectTo: 'poll', pathMatch: 'full' },

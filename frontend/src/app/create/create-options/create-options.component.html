@@ -2,12 +2,17 @@
 
 <div class="tab-group">
   <a
-    routerLink="simple"
-    [ngClass]="{ selected: router.url.includes('/simple') }"
+    routerLink="."
+    skipLocationChange
+    [ngClass]="{ selected: !router.url.includes('/date') }"
   >
     Simple
   </a>
-  <a routerLink="date" [ngClass]="{ selected: router.url.includes('/date') }">
+  <a
+    routerLink="date"
+    skipLocationChange
+    [ngClass]="{ selected: router.url.includes('/date') }"
+  >
     Date
   </a>
 </div>

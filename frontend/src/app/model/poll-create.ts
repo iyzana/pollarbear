@@ -6,7 +6,7 @@ import { SelectKind } from './enum/select-kind';
 import { SummaryKind } from './summary-kind';
 
 export interface PollCreate {
-  title: String;
+  title: string;
   selelctKind: SelectKind;
   secrecyKind: SecrecyKind;
   optionKind: OptionKind;

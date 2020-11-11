@@ -7,7 +7,7 @@ import org.springframework.beans.factory.InitializingBean
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
+import java.time.LocalDate
 import javax.annotation.PostConstruct
 
 @SpringBootApplication
@@ -28,7 +28,7 @@ class Init(val polls: PollRepo) {
             OptionKind.YesNoMaybe,
             SummaryKind(CutoffKind.Top, 1),
             AnswerKind.Simple,
-            LocalDateTime.now()
+            LocalDate.now()
         )
         poll.options.add(Option("Roar!", false))
         poll.options.add(Option("Rawr!", false))
