@@ -1,11 +1,19 @@
 <form [formGroup]="form">
   <ol formArrayName="options">
     <li *ngFor="let option of options.controls; let i = index">
-      <input
-        type="text"
-        [formControlName]="i"
-        [placeholder]="'Option ' + (i + 1)"
-      />
+      <div [formGroupName]="i">
+        <input
+          #optionInput
+          type="text"
+          formControlName="text"
+          [placeholder]="'Option ' + (i + 1)"
+          (blur)="removeEmptyOptions()"
+        />
+      </div>
     </li>
   </ol>
+
+  <div class="create">
+    <button type="submit" (click)="createPoll()">Create &gt;</button>
+  </div>
 </form>

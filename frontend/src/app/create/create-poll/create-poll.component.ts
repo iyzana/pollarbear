@@ -53,6 +53,7 @@ export class CreatePollComponent implements OnInit {
             : input.summaryKind.cutoffValueTopPercent,
       },
     };
+    localStorage.clear();
     localStorage.setItem('pollCreate', JSON.stringify(pollCreate));
   }
 }

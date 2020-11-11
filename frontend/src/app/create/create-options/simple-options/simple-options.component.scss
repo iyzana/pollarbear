@@ -1,4 +1,13 @@
-li > input {
+li input {
   width: 100%;
   font-size: 1rem;
+}
+
+.create {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create > *:last-child {
+  margin-left: auto;
 }
