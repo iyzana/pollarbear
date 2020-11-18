@@ -7,7 +7,7 @@ import { SummaryKind } from './summary-kind';
 
 export interface PollCreate {
   title: string;
-  selelctKind: SelectKind;
+  selectKind: SelectKind;
   secrecyKind: SecrecyKind;
   optionKind: OptionKind;
   summaryKind: SummaryKind;

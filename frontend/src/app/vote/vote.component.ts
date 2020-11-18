@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PollView } from '../model/poll-view';
 
 @Component({
   selector: 'app-choice',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vote.component.scss'],
 })
 export class VoteComponent implements OnInit {
-  constructor() {}
+  poll: PollView;
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.data.subscribe(({ poll }) => (this.poll = poll));
+  }
 }

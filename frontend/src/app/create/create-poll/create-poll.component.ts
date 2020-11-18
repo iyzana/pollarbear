@@ -6,22 +6,24 @@ import { OptionKind } from '../../model/enum/option-kind';
 import { SecrecyKind } from '../../model/enum/secrecy-kind';
 import { SelectKind } from '../../model/enum/select-kind';
 import { PollCreate } from '../../model/poll-create';
+import { CreateService } from '../create.service';
+import { debounce, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-poll',
   templateUrl: './create-poll.component.html',
   styleUrls: ['./create-poll.component.scss'],
 })
-export class CreatePollComponent implements OnInit, OnDestroy {
+export class CreatePollComponent implements OnInit {
   now = new Date().toISOString().split('T')[0];
 
   form: FormGroup;
   advanced = false;
 
-  constructor() {}
+  constructor(private createService: CreateService) {}
 
   ngOnInit(): void {
-    const restore = JSON.parse(sessionStorage.getItem('pollCreate') || 'null');
+    const restore = this.createService.getPollInCreation();
 
     this.form = new FormGroup({
       title: new FormControl(restore?.title || '', Validators.required),
@@ -48,19 +50,17 @@ export class CreatePollComponent implements OnInit, OnDestroy {
       }),
       deadline: new FormControl(restore?.deadline),
     });
-  }
 
-  ngOnDestroy(): void {
-    sessionStorage.setItem('pollCreate', JSON.stringify(this.getPollCreate()));
+    this.form.valueChanges.subscribe(() => {
+      this.createService.setPollInCreation(this.getPollCreate());
+    });
   }
 
   getPollCreate(): PollCreate {
     const input = this.form.value;
-    const restore = JSON.parse(sessionStorage.getItem('pollCreate') || '{}');
     return {
       answerKind: AnswerKind.Simple,
       options: [],
-      ...restore,
       ...input,
       summaryKind: {
         cutoffKind: input.summaryKind.cutoffKind,

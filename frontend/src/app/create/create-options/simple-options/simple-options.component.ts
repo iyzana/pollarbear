@@ -28,7 +28,7 @@ export class SimpleOptionsComponent
 
   ngOnInit(): void {
     const restore: OptionCreate[] = JSON.parse(
-      sessionStorage.getItem('pollCreate_optionsSimple') || '[]',
+      sessionStorage.getItem(CreateService.POLL_CREATE_OPTIONS_SIMPLE) || '[]',
     );
 
     this.form = new FormGroup({
@@ -44,9 +44,9 @@ export class SimpleOptionsComponent
     });
     this.addEmptyOption();
 
-    const poll: PollCreate = JSON.parse(sessionStorage.getItem('pollCreate'));
+    const poll = this.createService.getPollInCreation();
     poll.answerKind = AnswerKind.Simple;
-    sessionStorage.setItem('pollCreate', JSON.stringify(poll));
+    this.createService.setPollInCreation(poll);
   }
 
   ngAfterViewInit(): void {
@@ -105,7 +105,7 @@ export class SimpleOptionsComponent
 
   createPoll() {
     const pollCreate: PollCreate = {
-      ...JSON.parse(sessionStorage.getItem('pollCreate')),
+      ...this.createService.getPollInCreation(),
       options: this.form
         .get('options')
         .value.filter((option: OptionCreate) => option.text.trim() !== ''),

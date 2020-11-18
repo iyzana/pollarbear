@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnswerKind } from '../../model/enum/answer-kind';
-import { PollCreate } from '../../model/poll-create';
+import { CreateService } from '../create.service';
 
 @Component({
   selector: 'app-create-options',
@@ -11,15 +11,10 @@ import { PollCreate } from '../../model/poll-create';
 export class CreateOptionsComponent implements OnInit {
   title: string;
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private createService: CreateService) {}
 
   ngOnInit(): void {
-    const pollJson = sessionStorage.getItem('pollCreate');
-    if (!pollJson) {
-      this.router.navigate(['/create']);
-      return;
-    }
-    const poll: PollCreate = JSON.parse(pollJson);
+    const poll = this.createService.getPollInCreation();
     if (poll.answerKind === AnswerKind.Date) {
       this.router.navigate(['create', 'options', 'date'], {
         skipLocationChange: true,

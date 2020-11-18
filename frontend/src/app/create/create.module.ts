@@ -6,7 +6,7 @@ import { CreatePollComponent } from './create-poll/create-poll.component';
 import { CreateOptionsComponent } from './create-options/create-options.component';
 import { SimpleOptionsComponent } from './create-options/simple-options/simple-options.component';
 import { DateOptionsComponent } from './create-options/date-options/date-options.component';
-import { FormControlName, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
