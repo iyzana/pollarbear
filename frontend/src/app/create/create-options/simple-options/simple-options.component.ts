@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   QueryList,
@@ -21,7 +22,7 @@ import { CreateService } from '../../create.service';
 export class SimpleOptionsComponent
   implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('optionInput')
-  optionInputs: QueryList<HTMLElement>;
+  optionInputs: QueryList<ElementRef>;
   form: FormGroup;
 
   constructor(private createService: CreateService, private router: Router) {}
@@ -51,7 +52,7 @@ export class SimpleOptionsComponent
 
   ngAfterViewInit(): void {
     this.removeEmptyOptions();
-    (this.optionInputs.last as any).nativeElement.focus();
+    this.optionInputs.last.nativeElement.focus();
   }
 
   ngOnDestroy(): void {
@@ -79,8 +80,7 @@ export class SimpleOptionsComponent
         option.value.text === '' &&
         (i !== options.length - 1 ||
           (penultimate && penultimate.value.text === '')) &&
-        (this.optionInputs.toArray()[i] as any).nativeElement !==
-          document.activeElement
+        this.optionInputs.toArray()[i].nativeElement !== document.activeElement
       ) {
         emptyOptions.push(i);
       }

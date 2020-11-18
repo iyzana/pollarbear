@@ -1,3 +1,15 @@
 <h1>{{ poll.title }}</h1>
 
-<p>vote works!</p>
+<ol>
+  <li
+    class="card option"
+    (click)="toggle(option.id)"
+    *ngFor="let option of poll.options"
+  >
+    <input [id]="'option-' + option.id" #voteOption type="checkbox" />
+    <div class="checkbox"></div>
+    <label [for]="'option-' + option.id">
+      {{ option.text }}
+    </label>
+  </li>
+</ol>

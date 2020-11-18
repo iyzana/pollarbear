@@ -1,14 +1,14 @@
 :root {
-  --bg: #444444;
-  --bg-light: #555555;
-  --fg: #c4dbe0;
-  --accent: #d7fffe;
-  --accent-dark: #bbe8e7;
-  --accent-darker: #6ecfcc;
+  --bg: #333333;
+  --bg-light: #444444;
+  --fg: #d5e5e9;
+  --accent: #8dc4d9;
+  --accent-alt: #c6e2ec;
   --invalid: #d73030;
   --s0: 0.5rem;
-  --s1: 2rem;
-  --s2: 6vh;
+  --s1: 1.2rem;
+  --s2: 2rem;
+  --s3: 6vh;
   --border: 2px;
   --radius: 4px;
 }
@@ -33,7 +33,7 @@ html {
 body {
   width: 85%;
   max-width: 1000px;
-  margin: var(--s2) auto;
+  margin: var(--s3) auto;
 }
 
 @media (min-width: 600px) {
@@ -50,7 +50,7 @@ h1 {
   font-weight: unset;
 }
 
-/* components */
+/* text input */
 
 input {
   color: var(--fg);
@@ -65,6 +65,8 @@ input.ng-invalid.ng-touched,
 input.ng-invalid.ng-dirty {
   border-color: var(--invalid);
 }
+
+/* buttons */
 
 button {
   font-size: 1rem;
@@ -95,6 +97,8 @@ button:focus {
 button:disabled {
   border-color: var(--bg-light);
 }
+
+/* tabs */
 
 .tab-group {
   width: 100%;
@@ -128,16 +132,20 @@ button:disabled {
   }
 }
 
+/* list */
+
 ol {
   padding: 0;
-  margin: calc(var(--s1) * -1 + var(--s2)) 0;
+  margin: calc(var(--s2) * -1 + var(--s3)) 0;
 }
 
 ol > li {
   width: 100%;
-  margin: var(--s1) 0;
+  margin: var(--s2) 0;
   list-style-type: none;
 }
+
+/* fieldset */
 
 fieldset {
   border: none;
@@ -168,6 +176,8 @@ fieldset:focus-within > label {
 fieldset > input {
   width: 100%;
 }
+
+/* radio group */
 
 .radio-group {
   display: flex;
@@ -200,4 +210,17 @@ fieldset > input {
     color: var(--bg);
     background-color: var(--accent);
   }
+}
+
+/* cards */
+
+.card {
+  width: 100%;
+  padding: var(--s1);
+  border-radius: var(--radius);
+  background-color: var(--bg-light);
+  color: var(--fg);
+  font-weight: 500;
+  cursor: pointer;
+  border: var(--border) solid var(--bg-light);
 }

@@ -4,11 +4,11 @@
 }
 
 .config {
-  margin: var(--s2) 0;
+  margin: var(--s3) 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
   row-gap: 4vh;
-  column-gap: var(--s1);
+  column-gap: var(--s2);
 }
 
 .config {
@@ -35,7 +35,7 @@ label {
   }
 
   input[type='number']::selection {
-    background-color: var(--accent-darker);
+    background-color: var(--accent);
   }
 
   input::-webkit-outer-spin-button,
@@ -49,7 +49,7 @@ label {
 input[type='radio']:checked + label {
   input[type='number'] {
     color: var(--bg);
-    background-color: var(--accent-dark);
+    background-color: var(--accent-alt);
     border-color: var(--bg);
   }
   input[type='number'].ng-invalid {
