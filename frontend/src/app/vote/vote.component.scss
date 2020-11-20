@@ -33,6 +33,7 @@ input[type='checkbox'] {
   transition-duration: 0.1s;
   &:after {
     content: '';
+    opacity: 0;
     display: inline-block;
     color: var(--bg);
     position: relative;
@@ -42,7 +43,9 @@ input[type='checkbox'] {
     border-right: 3px solid var(--bg);
     border-radius: 0 0 1px 0;
     transform: rotate(45deg);
-    left: 6px;
+    transition-property: opacity;
+    transition-duration: 0.1s;
+    left: 7px;
     bottom: 4px;
   }
 }
@@ -55,5 +58,8 @@ input[type='checkbox']:checked ~ .option {
   .checkmark {
     background-color: var(--accent);
     border-color: transparent;
+    &:after {
+      opacity: 100%;
+    }
   }
 }

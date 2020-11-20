@@ -6,7 +6,7 @@
 .config {
   margin: var(--s3) 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(310px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   row-gap: 4vh;
   column-gap: var(--s2);
 }
