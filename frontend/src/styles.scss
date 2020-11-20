@@ -59,11 +59,11 @@ input {
   border: none;
   border-bottom: var(--border) solid var(--accent);
   border-radius: var(--radius) var(--radius) 0 0;
-}
 
-input.ng-invalid.ng-touched,
-input.ng-invalid.ng-dirty {
-  border-color: var(--invalid);
+  &.ng-invalid.ng-touched,
+  &.ng-invalid.ng-dirty {
+    border-color: var(--invalid);
+  }
 }
 
 /* buttons */
@@ -79,23 +79,26 @@ button {
   cursor: pointer;
   transition: color background-color;
   transition-duration: 0.1s;
-}
 
-button.link {
-  border: none;
-}
+  &.link {
+    border: none;
+  }
+  &:hover {
+    color: var(--bg);
+    background-color: var(--accent);
+  }
+  &:focus {
+    text-decoration: underline 2px;
+  }
+  &:disabled {
+    cursor: initial;
+    border-color: var(--bg-light);
 
-button:hover {
-  color: var(--bg);
-  background-color: var(--accent);
-}
-
-button:focus {
-  text-decoration: underline 2px;
-}
-
-button:disabled {
-  border-color: var(--bg-light);
+    &:hover {
+      color: var(--fg);
+      background-color: var(--bg);
+    }
+  }
 }
 
 /* tabs */
@@ -118,17 +121,18 @@ button:disabled {
     padding: var(--s0);
     margin: -1px;
     cursor: pointer;
-  }
-  a:first-of-type {
-    border-radius: var(--radius) 0 0 var(--radius);
-  }
-  a:last-of-type {
-    border-radius: 0 var(--radius) var(--radius) 0;
-    border-right: none;
-  }
-  a.selected {
-    color: var(--bg);
-    background-color: var(--accent);
+
+    &:first-of-type {
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+    &:last-of-type {
+      border-radius: 0 var(--radius) var(--radius) 0;
+      border-right: none;
+    }
+    &.selected {
+      color: var(--bg);
+      background-color: var(--accent);
+    }
   }
 }
 
@@ -137,12 +141,12 @@ button:disabled {
 ol {
   padding: 0;
   margin: calc(var(--s2) * -1 + var(--s3)) 0;
-}
 
-ol > li {
-  width: 100%;
-  margin: var(--s2) 0;
-  list-style-type: none;
+  & > li {
+    width: 100%;
+    margin: var(--s2) 0;
+    list-style-type: none;
+  }
 }
 
 /* fieldset */
@@ -151,30 +155,30 @@ fieldset {
   border: none;
   padding: 0;
   margin: 0;
-}
 
-fieldset > legend,
-fieldset > label {
-  display: inline-block;
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: var(--s0);
-}
+  & > legend,
+  & > label {
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: var(--s0);
+  }
 
-fieldset:active > legend,
-fieldset:active > label {
-  text-decoration-line: underline;
-  text-decoration-thickness: 2px;
-}
+  &:active > legend,
+  &:active > label {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+  }
 
-fieldset:focus-within > legend,
-fieldset:focus-within > label {
-  text-decoration-line: underline;
-  text-decoration-thickness: 2px;
-}
+  &:focus-within > legend,
+  &:focus-within > label {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+  }
 
-fieldset > input {
-  width: 100%;
+  & > input {
+    width: 100%;
+  }
 }
 
 /* radio group */
@@ -198,13 +202,14 @@ fieldset > input {
     padding: var(--s0);
     margin: -1px;
     cursor: pointer;
-  }
-  label:first-of-type {
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  label:last-of-type {
-    border-radius: 0 0 var(--radius) var(--radius);
-    border-bottom: none;
+
+    &:first-of-type {
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    &:last-of-type {
+      border-radius: 0 0 var(--radius) var(--radius);
+      border-bottom: none;
+    }
   }
   input[type='radio']:checked + label {
     color: var(--bg);
@@ -221,6 +226,5 @@ fieldset > input {
   background-color: var(--bg-light);
   color: var(--fg);
   font-weight: 500;
-  cursor: pointer;
   border: var(--border) solid var(--bg-light);
 }

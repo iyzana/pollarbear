@@ -3,6 +3,7 @@
     <li *ngFor="let option of options.controls; let i = index">
       <div [formGroupName]="i">
         <input
+          class="card"
           #optionInput
           type="text"
           formControlName="text"
