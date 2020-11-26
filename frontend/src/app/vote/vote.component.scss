@@ -29,7 +29,7 @@ input[type='checkbox'] {
   border: var(--border) solid var(--fg);
   border-radius: var(--radius);
   margin-right: var(--s0);
-  transition-property: background-color border-color;
+  transition-property: background-color;
   transition-duration: 0.1s;
   &:after {
     content: '';
@@ -62,4 +62,13 @@ input[type='checkbox']:checked ~ .option {
       opacity: 100%;
     }
   }
+}
+
+.votebar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.name {
+  margin-right: var(--s1);
 }

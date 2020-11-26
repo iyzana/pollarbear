@@ -1,13 +1,20 @@
 <h1>{{ poll.title }}</h1>
 
-<ol>
-  <li (click)="toggle(option.id)" *ngFor="let option of poll.options">
-    <input [id]="'option-' + option.id" #voteOption type="checkbox" />
-    <div class="card option">
-      <div class="checkmark"></div>
-      <label [for]="'option-' + option.id">
-        {{ option.text }}
-      </label>
-    </div>
-  </li>
-</ol>
+<form>
+  <ol>
+    <li (click)="toggle(option.id)" *ngFor="let option of poll.options">
+      <input [id]="'option-' + option.id" #voteOption type="checkbox" />
+      <div class="card option">
+        <div class="checkmark"></div>
+        <label [for]="'option-' + option.id">
+          {{ option.text }}
+        </label>
+      </div>
+    </li>
+  </ol>
+
+  <div class="votebar">
+    <input class="name" type="text" placeholder="Name" />
+    <button type="submit" class="vote" (click)="vote()">Vote →</button>
+  </div>
+</form>

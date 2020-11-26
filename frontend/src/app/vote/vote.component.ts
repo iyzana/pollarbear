@@ -32,4 +32,6 @@ export class VoteComponent implements OnInit {
     console.log('toggle');
     input.nativeElement.checked = !input.nativeElement.checked;
   }
+
+  vote() {}
 }
