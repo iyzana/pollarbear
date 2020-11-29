@@ -1,5 +1,5 @@
 export enum SelectionValue {
-  Yes = 'Yes',
   No = 'No',
+  Yes = 'Yes',
   Maybe = 'Maybe',
 }

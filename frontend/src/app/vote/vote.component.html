@@ -1,13 +1,45 @@
 <h1>{{ poll.title }}</h1>
 
-<form>
-  <ol>
-    <li (click)="toggle(option.id)" *ngFor="let option of poll.options">
-      <input [id]="'option-' + option.id" #voteOption type="checkbox" />
+<form [formGroup]="form">
+  <ol formArrayName="selection">
+    <li
+      *ngFor="let option of selection.controls; let i = index"
+      (click)="toggle(i)"
+    >
+      <input
+        [id]="'option-' + i + '-no'"
+        class="optionNo"
+        #voteOption
+        type="radio"
+        [name]="i"
+        [formControlName]="i"
+        value="No"
+        checked
+      />
+      <input
+        [id]="'option-' + i + '-yes'"
+        class="optionYes"
+        #voteOption
+        type="radio"
+        [name]="i"
+        [formControlName]="i"
+        value="Yes"
+      />
+      <input
+        [id]="'option-' + i + '-maybe'"
+        class="optionMaybe"
+        #voteOption
+        type="radio"
+        [name]="i"
+        [formControlName]="i"
+        value="Maybe"
+      />
       <div class="card option">
+        <span class="maybeDesignation maybeDesignationLeft">(</span>
         <div class="checkmark"></div>
-        <label [for]="'option-' + option.id">
-          {{ option.text }}
+        <span class="maybeDesignation">)</span>
+        <label [for]="'option-' + i">
+          {{ poll.options[i].text }}
         </label>
       </div>
     </li>

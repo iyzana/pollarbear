@@ -13,12 +13,22 @@
 
 label {
   cursor: pointer;
+  pointer-events: none;
+  margin-left: var(--s0);
 }
 
-input[type='checkbox'] {
+input[type='radio'] {
   position: fixed;
   opacity: 0;
   pointer-events: none;
+}
+
+.maybeDesignation {
+  visibility: hidden;
+}
+
+.maybeDesignationLeft {
+  margin-left: -4px;
 }
 
 .checkmark {
@@ -28,7 +38,6 @@ input[type='checkbox'] {
   background-color: var(--bg);
   border: var(--border) solid var(--fg);
   border-radius: var(--radius);
-  margin-right: var(--s0);
   transition-property: background-color;
   transition-duration: 0.1s;
   &:after {
@@ -50,7 +59,7 @@ input[type='checkbox'] {
   }
 }
 
-input[type='checkbox']:checked ~ .option {
+.optionYes:checked ~ .option {
   color: var(--bg);
   background-color: var(--accent);
   border-color: var(--accent);
@@ -62,6 +71,24 @@ input[type='checkbox']:checked ~ .option {
       opacity: 100%;
     }
   }
+}
+
+.optionMaybe:checked ~ .option {
+  color: var(--bg);
+  background: var(--alt-select);
+  border-color: var(--alt-select);
+
+  .checkmark {
+    background-color: var(--alt-select);
+    border-color: transparent;
+    &:after {
+      opacity: 100%;
+      transform: rotate(45deg);
+    }
+  }
+}
+.optionMaybe:checked ~ .option > .maybeDesignation {
+  visibility: visible;
 }
 
 .votebar {
