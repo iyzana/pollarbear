@@ -1,0 +1,20 @@
+version: "2.2"
+services:
+  backend:
+    build: backend
+    container_name: pollarbear_backend
+    restart: unless-stopped
+    networks:
+      - nginx
+    mem_limit: 512m
+  frontend:
+    build: frontend
+    container_name: pollarbear_frontend
+    restart: unless-stopped
+    networks:
+      - nginx
+
+networks:
+  nginx:
+    external:
+      name: nginx_default
