@@ -15,7 +15,7 @@ export class CreateService {
     return pollCreate !== null ? JSON.parse(pollCreate) : null;
   }
 
-  setPollInCreation(pollCreate: PollCreate | null) {
+  setPollInCreation(pollCreate: PollCreate | null): void {
     if (pollCreate === null) {
       sessionStorage.removeItem('poll_create');
     } else {

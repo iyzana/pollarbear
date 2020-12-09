@@ -1,12 +1,11 @@
 import {
   Component,
   ElementRef,
-  OnDestroy,
   OnInit,
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnswerCreate } from '../model/answer-create';
 import { SelectionValue } from '../model/enum/selection-value';
@@ -90,7 +89,7 @@ export class VoteComponent implements OnInit {
     };
   }
 
-  toggle(idx: number) {
+  toggle(idx: number): void {
     const control = this.selection.at(idx);
     const currentValue = control.value;
     const currentSelection = Object.keys(SelectionValue).indexOf(currentValue);
@@ -99,7 +98,7 @@ export class VoteComponent implements OnInit {
     control.patchValue(nextValue);
   }
 
-  vote() {
+  vote(): void {
     this.router.navigate(['/']);
   }
 }

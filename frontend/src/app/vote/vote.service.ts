@@ -15,7 +15,7 @@ export class VoteService {
     return answerCreate !== null ? JSON.parse(answerCreate) : null;
   }
 
-  setVoting(answerCreate: AnswerCreate | null) {
+  setVoting(answerCreate: AnswerCreate | null): void {
     if (answerCreate === null) {
       sessionStorage.removeItem('answer_create');
     } else {

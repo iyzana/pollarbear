@@ -66,7 +66,7 @@ export class SimpleOptionsComponent
     return this.form.get('options') as FormArray;
   }
 
-  removeEmptyOptions() {
+  removeEmptyOptions(): void {
     const options = this.options;
     const emptyOptions = [];
 
@@ -89,7 +89,7 @@ export class SimpleOptionsComponent
     emptyOptions.forEach((emptyOption) => options.removeAt(emptyOption));
   }
 
-  addEmptyOption() {
+  addEmptyOption(): void {
     const options = this.options;
     if (
       options.length === 0 ||
@@ -103,7 +103,7 @@ export class SimpleOptionsComponent
     }
   }
 
-  createPoll() {
+  createPoll(): void {
     const pollCreate: PollCreate = {
       ...this.createService.getPollInCreation(),
       options: this.form
