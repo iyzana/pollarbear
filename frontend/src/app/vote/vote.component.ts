@@ -8,6 +8,10 @@ import {
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnswerCreate } from '../model/answer-create';
+import { AnswerKind } from '../model/enum/answer-kind';
+import { OptionKind } from '../model/enum/option-kind';
+import { SecrecyKind } from '../model/enum/secrecy-kind';
+import { SelectKind } from '../model/enum/select-kind';
 import { SelectionValue } from '../model/enum/selection-value';
 import { PollView } from '../model/poll-view';
 import { VoteService } from './vote.service';
@@ -24,7 +28,10 @@ export class VoteComponent implements OnInit {
   form: FormGroup;
   poll: PollView;
 
+  // make enums available in template
   SelectionValue = SelectionValue;
+  SecrecyKind = SecrecyKind;
+  SelectKind = SelectKind;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,7 +63,6 @@ export class VoteComponent implements OnInit {
         );
       }
 
-      console.log(orderedSelection);
       this.form = new FormGroup({
         selection: new FormArray(
           orderedSelection
@@ -89,13 +95,26 @@ export class VoteComponent implements OnInit {
     };
   }
 
-  toggle(idx: number): void {
-    const control = this.selection.at(idx);
+  onClick(idx: number): void {
+    const selection = this.selection;
+    const control = selection.at(idx);
+    const numOptions = this.poll.optionKind === OptionKind.YesNo ? 2 : 3;
+
     const currentValue = control.value;
     const currentSelection = Object.keys(SelectionValue).indexOf(currentValue);
-    const nextSelection = (currentSelection + 1) % 3;
+    const nextSelection = (currentSelection + 1) % numOptions;
     const nextValue = Object.keys(SelectionValue)[nextSelection];
-    control.patchValue(nextValue);
+
+    if (this.poll.selectKind === SelectKind.Single) {
+      selection.setValue(new Array(selection.length).fill(SelectionValue.No));
+      if (nextValue === SelectionValue.No) {
+        control.patchValue(SelectionValue.Yes);
+      } else {
+        control.patchValue(nextValue);
+      }
+    } else if (this.poll.selectKind === SelectKind.Multiple) {
+      control.patchValue(nextValue);
+    }
   }
 
   vote(): void {

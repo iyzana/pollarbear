@@ -4,39 +4,31 @@
   <ol formArrayName="selection">
     <li
       *ngFor="let option of selection.controls; let i = index"
-      (click)="toggle(i)"
+      (click)="onClick(i)"
     >
       <input
-        [id]="'option-' + i + '-no'"
-        class="optionNo"
+        *ngFor="
+          let state of [
+            SelectionValue.No,
+            SelectionValue.Yes,
+            SelectionValue.Maybe
+          ]
+        "
+        [id]="'option' + i + state"
+        [class]="'option' + state"
         #voteOption
         type="radio"
         [name]="i"
         [formControlName]="i"
-        value="No"
+        [value]="state"
         checked
-      />
-      <input
-        [id]="'option-' + i + '-yes'"
-        class="optionYes"
-        #voteOption
-        type="radio"
-        [name]="i"
-        [formControlName]="i"
-        value="Yes"
-      />
-      <input
-        [id]="'option-' + i + '-maybe'"
-        class="optionMaybe"
-        #voteOption
-        type="radio"
-        [name]="i"
-        [formControlName]="i"
-        value="Maybe"
       />
       <div class="card option">
         <span class="maybeDesignation maybeDesignationLeft">(</span>
-        <div class="checkmark"></div>
+        <div
+          class="checkmark"
+          [ngClass]="{ single: poll.selectKind === SelectKind.Single }"
+        ></div>
         <span class="maybeDesignation">)</span>
         <label [for]="'option-' + i">
           {{ poll.options[i].text }}
@@ -46,7 +38,12 @@
   </ol>
 
   <div class="votebar">
-    <input class="name" type="text" placeholder="Name" />
+    <input
+      *ngIf="poll.secrecyKind === SecrecyKind.Open"
+      class="name"
+      type="text"
+      placeholder="Name"
+    />
     <button type="submit" class="vote" (click)="vote()">Vote →</button>
   </div>
 </form>

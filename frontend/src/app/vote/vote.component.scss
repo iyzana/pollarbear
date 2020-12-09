@@ -59,6 +59,10 @@ input[type='radio'] {
   }
 }
 
+.checkmark.single {
+  border-radius: 50%;
+}
+
 .optionYes:checked ~ .option {
   color: var(--bg);
   background-color: var(--accent);
@@ -86,9 +90,10 @@ input[type='radio'] {
       transform: rotate(45deg);
     }
   }
-}
-.optionMaybe:checked ~ .option > .maybeDesignation {
-  visibility: visible;
+
+  & > .maybeDesignation {
+    visibility: visible;
+  }
 }
 
 .votebar {
