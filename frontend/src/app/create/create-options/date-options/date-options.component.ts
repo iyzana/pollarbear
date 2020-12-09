@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnswerKind } from '../../../model/enum/answer-kind';
 import { PollCreate } from '../../../model/poll-create';
+import { CreateService } from '../../create.service';
 
 @Component({
   selector: 'app-date-options',
@@ -8,11 +9,11 @@ import { PollCreate } from '../../../model/poll-create';
   styleUrls: ['./date-options.component.scss'],
 })
 export class DateOptionsComponent implements OnInit {
-  constructor() {}
+  constructor(private createService: CreateService) {}
 
   ngOnInit(): void {
-    const poll: PollCreate = JSON.parse(sessionStorage.getItem('pollCreate'));
-    poll.answerKind = AnswerKind.Date;
-    sessionStorage.setItem('pollCreate', JSON.stringify(poll));
+    const pollCreate: PollCreate = this.createService.getPollInCreation();
+    pollCreate.answerKind = AnswerKind.Date;
+    this.createService.setPollInCreation(pollCreate);
   }
 }
