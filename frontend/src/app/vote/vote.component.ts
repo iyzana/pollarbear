@@ -5,10 +5,9 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnswerCreate } from '../model/answer-create';
-import { AnswerKind } from '../model/enum/answer-kind';
 import { OptionKind } from '../model/enum/option-kind';
 import { SecrecyKind } from '../model/enum/secrecy-kind';
 import { SelectKind } from '../model/enum/select-kind';
@@ -69,7 +68,12 @@ export class VoteComponent implements OnInit {
             ? orderedSelection.map(([_, value]) => new FormControl(value))
             : this.poll.options.map(() => new FormControl(SelectionValue.No)),
         ),
-        from: new FormControl(restore?.from),
+        from: new FormControl(
+          restore?.from,
+          this.poll.secrecyKind === SecrecyKind.Open
+            ? Validators.required
+            : null,
+        ),
       });
       this.form.valueChanges.subscribe(() => {
         this.voteService.setVoting(this.formToAnswer());
@@ -95,7 +99,7 @@ export class VoteComponent implements OnInit {
     };
   }
 
-  onClick(idx: number): void {
+  toggleSelection(idx: number): void {
     const selection = this.selection;
     const control = selection.at(idx);
     const numOptions = this.poll.optionKind === OptionKind.YesNo ? 2 : 3;
@@ -117,7 +121,24 @@ export class VoteComponent implements OnInit {
     }
   }
 
+  onClick(idx: number): void {
+    this.toggleSelection(idx);
+  }
+
+  onKey(event: KeyboardEvent, idx: number): void {
+    console.log(event.key);
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleSelection(idx);
+    }
+  }
+
   vote(): void {
-    this.router.navigate(['/']);
+    this.form.disable();
+    this.voteService.vote(this.formToAnswer()).subscribe(
+      () => {
+        this.router.navigate(['/results', this.poll.ref]);
+      },
+      () => this.form.enable(),
+    );
   }
 }

@@ -4,7 +4,9 @@
   <ol formArrayName="selection">
     <li
       *ngFor="let option of selection.controls; let i = index"
+      tabindex="0"
       (click)="onClick(i)"
+      (keydown)="onKey($event, i)"
     >
       <input
         *ngFor="
@@ -21,6 +23,7 @@
         [name]="i"
         [formControlName]="i"
         [value]="state"
+        tabindex="-1"
         checked
       />
       <div class="card option">
@@ -43,7 +46,15 @@
       class="name"
       type="text"
       placeholder="Name"
+      formControlName="from"
     />
-    <button type="submit" class="vote" (click)="vote()">Vote →</button>
+    <button
+      type="submit"
+      class="vote"
+      [disabled]="form.invalid"
+      (click)="vote()"
+    >
+      Vote →
+    </button>
   </div>
 </form>

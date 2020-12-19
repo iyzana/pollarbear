@@ -17,6 +17,11 @@ label {
   margin-left: var(--s0);
 }
 
+li:focus label {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+}
+
 input[type='radio'] {
   position: fixed;
   opacity: 0;
