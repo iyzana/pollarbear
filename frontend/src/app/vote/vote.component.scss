@@ -108,4 +108,10 @@ input[type='radio'] {
 
 .name {
   margin-right: var(--s1);
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.vote {
+  flex-shrink: 0;
 }
