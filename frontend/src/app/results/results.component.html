@@ -1,1 +1,66 @@
-<p>results works!</p>
+<div class="header">
+  <h1>{{ poll.title }}</h1>
+  <div class="numvotes">
+    {{ poll.answers.length }} {{ poll.answers.length === 1 ? 'vote' : 'votes' }}
+  </div>
+</div>
+
+<ol>
+  <li *ngFor="let result of results">
+    <div class="card result">
+      <label>
+        {{ result.text }}
+      </label>
+      <div class="counts">
+        <span class="tooltip">
+          <span class="count" *ngIf="poll.selectKind === SelectKind.Multiple">
+            <fa-icon class="no" [icon]="faTimes"></fa-icon>
+            {{ result.no.length }}
+          </span>
+          <span
+            class="tooltiptext"
+            *ngIf="
+              poll.secrecyKind === SecrecyKind.Open && result.no.length !== 0
+            "
+          >
+            <div *ngFor="let from of result.no">
+              {{ from }}
+            </div>
+          </span>
+        </span>
+        <span class="tooltip">
+          <span class="count" *ngIf="poll.optionKind === OptionKind.YesNoMaybe">
+            <fa-icon class="maybe" [icon]="faCircleNotch"></fa-icon>
+            {{ result.maybe.length }}
+          </span>
+          <span
+            class="tooltiptext"
+            *ngIf="
+              poll.secrecyKind === SecrecyKind.Open && result.maybe.length !== 0
+            "
+          >
+            <div *ngFor="let from of result.maybe">
+              {{ from }}
+            </div>
+          </span>
+        </span>
+        <span class="tooltip">
+          <span class="count">
+            <fa-icon class="yes" [icon]="faCheckSquare"></fa-icon>
+            {{ result.yes.length }}
+          </span>
+          <span
+            class="tooltiptext"
+            *ngIf="
+              poll.secrecyKind === SecrecyKind.Open && result.yes.length !== 0
+            "
+          >
+            <div *ngFor="let from of result.yes">
+              {{ from }}
+            </div>
+          </span>
+        </span>
+      </div>
+    </div>
+  </li>
+</ol>

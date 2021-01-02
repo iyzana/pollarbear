@@ -24,10 +24,6 @@ export class VoteService {
     }
   }
 
-  getPoll(ref: string): Observable<PollView> {
-    return this.http.get<PollView>(`/api/poll/${ref}`);
-  }
-
   vote(answerCreate: AnswerCreate): Observable<AnswerView> {
     return this.http.post<AnswerView>('/api/answer', answerCreate);
   }

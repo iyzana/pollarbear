@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/answer")
 class AnswerController(val answerService: AnswerService) {
-    @GetMapping("/{pollRef}")
-    fun getAllByPollRef(@PathVariable pollRef: String): List<AnswerView> {
-        return answerService.getAllByPollRef(pollRef).map { AnswerView(it) }
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody answerCreate: AnswerCreate): AnswerView {

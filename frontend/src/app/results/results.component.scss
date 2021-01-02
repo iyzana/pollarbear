@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: var(--s2);
+  margin-bottom: var(--s3);
+}
+
+h1 {
+  margin: 0;
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+}
+
+.count {
+  margin: var(--s0);
+}
+
+.yes {
+  color: #6ad892;
+}
+
+.maybe {
+  color: #d8cf6a;
+}
+
+.no {
+  color: #d86a6a;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
+
+  background-color: var(--bg-light);
+  border: var(--border) solid var(--accent);
+  border-radius: var(--radius);
+
+  min-height: 3vh;
+  top: 120%;
+  right: 0%;
+  padding: var(--s0);
+  width: 500%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  text-align: center;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
