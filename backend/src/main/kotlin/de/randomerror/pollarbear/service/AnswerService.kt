@@ -65,7 +65,7 @@ class AnswerService(val answers: AnswerRepo, val polls: PollRepo) {
             throw InvalidAnswer("Field from may not be set for Secret poll ${poll.ref}")
         }
         if (poll.deadline != null && LocalDate.now().isAfter(poll.deadline)) {
-            throw InvalidAnswer("Deadling has expired for poll ${poll.ref}")
+            throw InvalidAnswer("Deadline has expired for poll ${poll.ref}")
         }
         if (poll.options.map { it.id }.toSet() != answerCreate.selection.keys) {
             throw InvalidAnswer("Answers for too many or too few options were provided for poll ${poll.ref}")
