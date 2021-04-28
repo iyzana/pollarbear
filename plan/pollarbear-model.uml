@@ -1,0 +1,74 @@
+class poll {
+  title: string
+  options: option[]
+  answers: answer[]
+  select_kind: select_kind
+  secrecy_kind: secrecy_kind
+  option_kind: option_kind
+  summary_kind: summary_kind
+  answer_kind: answer_kind
+  deadline: datetime
+}
+poll --> option
+poll --> answer
+poll --> select_kind
+poll --> secrecy_kind
+poll --> option_kind
+poll --> summary_kind
+poll --> answer_kind
+
+class option {
+  text: string
+  image: byte[]?
+}
+
+class answer {
+  from: string?
+  selection: selection[]
+}
+answer --> selection
+
+class selection {
+  option: option
+  value: selection_value
+}
+selection --> option
+selection --> selection_value
+
+enum selection_value {
+  yes
+  no
+  maybe
+}
+
+enum answer_kind {
+  simple
+  date
+}
+
+class summary_kind {
+  cutoff_kind: cutoff_kind
+  cutoff_value: int
+}
+summary_kind --> cutoff_kind
+
+enum cutoff_kind {
+  top
+  top_percent
+}
+
+enum select_kind {
+  single
+  multiple
+}
+
+enum secrecy_kind {
+  secret
+  open
+}
+
+enum option_kind {
+  yes_no
+  yes_no_maybe
+}
+
