@@ -84,12 +84,13 @@
         <label for="resultsTop">
           Show top&nbsp;
           <input
+            #resultsTop
             type="number"
             min="0"
             (click)="
               this.form.patchValue({ summaryKind: { cutoffKind: 'Top' } })
             "
-            (focus)="$event.target.select()"
+            (focus)="resultsTop.select()"
             [tabindex]="
               this.form.get('summaryKind').get('cutoffKind').value ===
               'TopPercent'
@@ -109,6 +110,7 @@
         <label for="resultsTopPercent">
           Show above &nbsp;
           <input
+            #resultsTopPercent
             type="number"
             min="0"
             max="100"
@@ -117,7 +119,7 @@
                 summaryKind: { cutoffKind: 'TopPercent' }
               })
             "
-            (focus)="$event.target.select()"
+            (focus)="resultsTopPercent.select()"
             [tabindex]="
               this.form.get('summaryKind').get('cutoffKind').value === 'Top'
                 ? -1

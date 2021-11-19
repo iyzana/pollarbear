@@ -3,14 +3,14 @@
 <div class="tab-group">
   <a
     routerLink="."
-    skipLocationChange
+    [skipLocationChange]="true"
     [ngClass]="{ selected: !router.url.includes('/date') }"
   >
     Simple
   </a>
   <a
     routerLink="./date"
-    skipLocationChange
+    [skipLocationChange]="true"
     [ngClass]="{ selected: router.url.includes('/date') }"
   >
     Date
