@@ -1,6 +1,7 @@
 server:
   error:
     include-message: always
+  context-path: /api
 spring:
   servlet:
     multipart:
