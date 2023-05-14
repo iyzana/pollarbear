@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AnswerKind } from '../../model/enum/answer-kind';
 import { CutoffKind } from '../../model/enum/cutoff-kind';
@@ -7,7 +7,6 @@ import { SecrecyKind } from '../../model/enum/secrecy-kind';
 import { SelectKind } from '../../model/enum/select-kind';
 import { PollCreate } from '../../model/poll-create';
 import { CreateService } from '../create.service';
-import { debounce, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-poll',

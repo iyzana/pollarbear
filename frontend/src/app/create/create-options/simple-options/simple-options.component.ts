@@ -7,7 +7,11 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnswerKind } from '../../../model/enum/answer-kind';
 import { OptionCreate } from '../../../model/option-create';
@@ -20,10 +24,11 @@ import { CreateService } from '../../create.service';
   styleUrls: ['./simple-options.component.scss'],
 })
 export class SimpleOptionsComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChildren('optionInput')
   optionInputs: QueryList<ElementRef>;
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(private createService: CreateService, private router: Router) {}
 
@@ -32,10 +37,11 @@ export class SimpleOptionsComponent
       sessionStorage.getItem(CreateService.POLL_CREATE_OPTIONS_SIMPLE) || '[]',
     );
 
-    this.form = new FormGroup({
-      options: new FormArray(
+    this.form = new UntypedFormGroup({
+      options: new UntypedFormArray(
         restore.map(
-          (option) => new FormGroup({ text: new FormControl(option.text) }),
+          (option) =>
+            new UntypedFormGroup({ text: new UntypedFormControl(option.text) }),
         ),
       ),
     });
@@ -62,8 +68,8 @@ export class SimpleOptionsComponent
     );
   }
 
-  get options(): FormArray {
-    return this.form.get('options') as FormArray;
+  get options(): UntypedFormArray {
+    return this.form.get('options') as UntypedFormArray;
   }
 
   removeEmptyOptions(): void {
@@ -96,8 +102,8 @@ export class SimpleOptionsComponent
       options.at(options.length - 1).value.text !== ''
     ) {
       options.push(
-        new FormGroup({
-          text: new FormControl(''),
+        new UntypedFormGroup({
+          text: new UntypedFormControl(''),
         }),
       );
     }

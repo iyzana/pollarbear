@@ -24,7 +24,10 @@ export class VoteComponent implements OnInit {
   @ViewChildren('voteOption')
   voteOptions: QueryList<ElementRef>;
 
-  form: FormGroup;
+  form: FormGroup<{
+    selection: FormArray;
+    from: FormControl<string>;
+  }>;
   poll: PollView;
 
   // make enums available in template
@@ -82,7 +85,7 @@ export class VoteComponent implements OnInit {
   }
 
   get selection(): FormArray {
-    return this.form.get('selection') as FormArray;
+    return this.form.controls.selection;
   }
 
   formToAnswer(): AnswerCreate {
@@ -134,11 +137,11 @@ export class VoteComponent implements OnInit {
 
   vote(): void {
     this.form.disable();
-    this.voteService.vote(this.formToAnswer()).subscribe(
-      () => {
+    this.voteService.vote(this.formToAnswer()).subscribe({
+      next: () => {
         this.router.navigate(['/results', this.poll.ref]);
       },
-      () => this.form.enable(),
-    );
+      error: () => this.form.enable(),
+    });
   }
 }
