@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PollView } from './model/poll-view';
 import { PollService } from './poll.service';
@@ -7,7 +7,7 @@ import { PollService } from './poll.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PollResolver implements Resolve<PollView> {
+export class PollResolver {
   constructor(private pollService: PollService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<PollView> {
